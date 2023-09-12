@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head><meta charset="UTF-8" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.v="1.2.3",this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",t=>{this.persisted=t.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(t){if(document.hidden){t._triggerListener();return}this.triggerEvents.forEach(e=>window.addEventListener(e,t.userEventHandler,{passive:!0})),window.addEventListener("touchstart",t.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",t.touchStartHandler),document.addEventListener("visibilitychange",t.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(t){"HTML"!==t.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),t.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(t){t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this.interceptedClicks.push(t),t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(t=>{t.target.dispatchEvent(new MouseEvent("click",{view:t.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(t=>{this._isClickPending?this._pendingClickFinished=t:t()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(t,e,r){t.hasAttribute&&t.hasAttribute(e)&&(event.target.setAttribute(r,event.target.getAttribute(e)),event.target.removeAttribute(e))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let t=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{if(e.hasAttribute("src")){let r=new URL(e.src).origin;r!==location.origin&&t.push({src:r,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this._batchInjectResourceHints(t,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(t){console.error(t)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _transformScript(t){return new Promise((await this._littleBreath(),navigator.userAgent.indexOf("Firefox/")>0||""===navigator.vendor)?e=>{let r=document.createElement("script");[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),r.setAttribute(e,t.nodeValue))}),t.text&&(r.text=t.text),r.hasAttribute("src")?(r.addEventListener("load",e),r.addEventListener("error",e)):(r.text=t.text,e());try{t.parentNode.replaceChild(r,t)}catch(i){e()}}:async e=>{function r(){t.setAttribute("data-rocket-status","failed"),e()}try{let i=t.getAttribute("data-rocket-type"),n=t.getAttribute("data-rocket-src");t.text,i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",function r(){t.setAttribute("data-rocket-status","executed"),e()}),t.addEventListener("error",r),n?(t.removeAttribute("data-rocket-src"),t.src=n):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}catch(s){r()}})}async _loadScriptsFromList(t){let e=t.shift();return e&&e.isConnected?(await this._transformScript(e),this._loadScriptsFromList(t)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(t,e){var r=document.createDocumentFragment();t.forEach(t=>{let i=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(i){let n=document.createElement("link");n.href=i,n.rel=e,"preconnect"!==e&&(n.as="script"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),r.appendChild(n),this.trash.push(n)}}),document.head.appendChild(r)}_delayEventListeners(t){let e={};function r(t,r){!function t(r){!e[r]&&(e[r]={originalFunctions:{add:r.addEventListener,remove:r.removeEventListener},eventsToRewrite:[]},r.addEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.add.apply(r,arguments)},r.removeEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.remove.apply(r,arguments)});function i(t){return e[r].eventsToRewrite.indexOf(t)>=0?"rocket-"+t:t}}(t),e[t].eventsToRewrite.push(r)}function i(t,e){let r=t[e];Object.defineProperty(t,e,{get:()=>r||function(){},set(i){t["rocket"+e]=r=i}})}r(document,"DOMContentLoaded"),r(window,"DOMContentLoaded"),r(window,"load"),r(window,"pageshow"),r(document,"readystatechange"),i(document,"onreadystatechange"),i(window,"onload"),i(window,"onpageshow")}_delayJQueryReady(t){let e;function r(r){if(r&&r.fn&&!t.allJQueries.includes(r)){r.fn.ready=r.fn.init.prototype.ready=function(e){return t.domReadyFired?e.bind(document)(r):document.addEventListener("rocket-DOMContentLoaded",()=>e.bind(document)(r)),r([])};let i=r.fn.on;r.fn.on=r.fn.init.prototype.on=function(){if(this[0]===window){function t(t){return t.split(" ").map(t=>"load"===t||0===t.indexOf("load.")?"rocket-jquery-load":t).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=t(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(e=>{let r=arguments[0][e];delete arguments[0][e],arguments[0][t(e)]=r})}return i.apply(this,arguments),this},t.allJQueries.push(r)}e=r}r(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){r(t)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this._littleBreath();let t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let t=new Map;document.write=document.writeln=function(e){let r=document.currentScript;r||console.error("WPRocket unable to document.write this: "+e);let i=document.createRange(),n=r.parentElement,s=t.get(r);void 0===s&&(s=r.nextSibling,t.set(r,s));let a=document.createDocumentFragment();i.setStart(a,0),a.appendChild(i.createContextualFragment(e)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}_emptyTrash(){this.trash.forEach(t=>t.remove())}static run(){let t=new RocketLazyLoadScripts;t._addUserInteractionListener(t)}}RocketLazyLoadScripts.run();</script>
+		<!-- Google Tag Manager -->
+		<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-57NSTB');</script>
+        <!-- character set -->
+        
+		<!-- Google Analytics: Global Site Tag -->
+					<script type="rocketlazyloadscript" async data-rocket-src="https://www.googletagmanager.com/gtag/js?id=UA-53437656-1"></script>
+			<script type="rocketlazyloadscript">
+				window.dataLayer = window.dataLayer || [];
+				function gtag() {
+					dataLayer.push(arguments);
+				}
+				gtag('js', new Date());
+				gtag('config', 'UA-53437656-1');
+			</script>
+				<!-- set initial scale -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- turn off auto phone links in Edge -->
+		<meta name="format-detection" content="telephone=no">
+		<!-- XFN (XHTML Friends Network) Profile Link -->
+		<link rel="profile" href="https://gmpg.org/xfn/11">
+		<!-- Pingback URL -->
+		<link rel="pingback" href="https://deborahmillercatering.com/xmlrpc.php">
+		<!-- Facebook domain verification -->
+		<meta name="facebook-domain-verification" content="05kltpardd9izp35ryy9b8hllcvlso" />
+		<!-- Facebook Pixel Code -->
+					<script type="rocketlazyloadscript">
+				!function (f, b, e, v, n, t, s) {
+					if (f.fbq)
+						return;
+					n = f.fbq = function () {
+						n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+					};
+					if (!f._fbq)
+						f._fbq = n;
+					n.push = n;
+					n.loaded = !0;
+					n.version = '2.0';
+					n.queue = [];
+					t = b.createElement(e);
+					t.async = !0;
+					t.src = v;
+					s = b.getElementsByTagName(e)[0];
+					s.parentNode.insertBefore(t, s);
+				}(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+				fbq('init', '844694362696755');
+				fbq('track', 'PageView');
+			</script>
+		<noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=844694362696755&ev=PageView &noscript=1"/></noscript>
+		<!-- wp_head() -->
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<title>Party Catering: Be Remarkable - Global Fussion Catering &amp; Events</title>
+	<meta name="description" content="As a top special occasion and party catering company, we&#039;re here to make your event vision a reality. It&#039;s time to be remarkable." />
+	<link rel="canonical" href="/occasions.html/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Party Catering: Be Remarkable - Global Fussion Catering &amp; Events" />
+	<meta property="og:description" content="As a top special occasion and party catering company, we&#039;re here to make your event vision a reality. It&#039;s time to be remarkable." />
+	<meta property="og:url" content="/occasions.html/" />
+	<meta property="og:site_name" content="Global Fussion Catering &amp; Events" />
+	<meta property="article:publisher" content="https://www.facebook.com/pages/112858402078255" />
+	<meta property="article:modified_time" content="2022-10-26T15:16:59+00:00" />
+	<meta property="og:image" content="https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-scaled.jpg" />
+	<meta property="og:image:width" content="3840" />
+	<meta property="og:image:height" content="2560" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@dmc_nyc" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://deborahmillercatering.com/occasions/","url":"https://deborahmillercatering.com/occasions/","name":"Party Catering: Be Remarkable - Global Fussion Catering &amp; Events","isPartOf":{"@id":"https://deborahmillercatering.com/#website"},"datePublished":"2021-09-29T16:20:20+00:00","dateModified":"2022-10-26T15:16:59+00:00","description":"As a top special occasion and party catering company, we're here to make your event vision a reality. It's time to be remarkable.","breadcrumb":{"@id":"https://deborahmillercatering.com/occasions/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://deborahmillercatering.com/occasions/"]}]},{"@type":"BreadcrumbList","@id":"https://deborahmillercatering.com/occasions/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://deborahmillercatering.com/"},{"@type":"ListItem","position":2,"name":"Special Occasions"}]},{"@type":"WebSite","@id":"https://deborahmillercatering.com/#website","url":"https://deborahmillercatering.com/","name":"Global Fussion Catering &amp; Events","description":"Corporate Catering | Wedding Catering | Global Fussion Catering &amp; Events","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://deborahmillercatering.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"}]}</script>
+
+
+<link rel='dns-prefetch' href='//unpkg.com' />
+<link rel='dns-prefetch' href='//www.google-analytics.com' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//www.facebook.com' />
+<link rel='dns-prefetch' href='//connect.facebook.net' />
+<link rel='dns-prefetch' href='//js.hsforms.net' />
+<link rel='dns-prefetch' href='//static.hsappstatic.net' />
+
+<link rel="alternate" type="application/rss+xml" title="Global Fussion Catering &amp; Events &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Global Fussion Catering &amp; Events &raquo; Comments Feed" href="/comments/feed/" />
+<style>
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css' href='https://deborahmillercatering.com/wp-includes/css/dist/block-library/style.min.css?ver=6.2.2' media='all' />
+<style id='wp-block-library-theme-inline-css'>
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<style id='safe-svg-svg-icon-style-inline-css'>
+.safe-svg-cover .safe-svg-inside{display:inline-block;max-width:100%}.safe-svg-cover svg{height:100%;max-height:100%;max-width:100%;width:100%}
+
+</style>
+<style id='global-styles-inline-css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 16px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--normal: 18px;--wp--preset--font-size--big: 24px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}body { margin: 0;--wp--style--global--content-size: 900px;--wp--style--global--wide-size: 1740px; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){text-decoration: underline;}.wp-element-button, .wp-block-button__link{background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-normal-font-size{font-size: var(--wp--preset--font-size--normal) !important;}.has-big-font-size{font-size: var(--wp--preset--font-size--big) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link data-minify="1" rel='stylesheet' id='swiper-css' href='https://deborahmillercatering.com/wp-content/cache/min/1/swiper@7/swiper-bundle.min.css?ver=1693248464' media='all' />
+<link data-minify="1" rel='stylesheet' id='custom-css' href='https://deborahmillercatering.com/wp-content/cache/min/1/wp-content/themes/dmce_custom/css/style.css?ver=1693248464' media='all' />
+<script type="rocketlazyloadscript" data-rocket-src='https://deborahmillercatering.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.4' id='jquery-core-js' defer></script>
+<link rel="https://api.w.org/" href="https://deborahmillercatering.com/wp-json/" /><link rel="alternate" type="application/json" href="https://deborahmillercatering.com/wp-json/wp/v2/pages/6891" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://deborahmillercatering.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://deborahmillercatering.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 6.2.2" />
+<link rel='shortlink' href='https://deborahmillercatering.com/?p=6891' />
+<link rel="alternate" type="application/json+oembed" href="https://deborahmillercatering.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeborahmillercatering.com%2Foccasions%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://deborahmillercatering.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeborahmillercatering.com%2Foccasions%2F&#038;format=xml" />
+<link rel="icon" href="https://deborahmillercatering.com/wp-content/uploads/2021/09/cropped-favicon-150x150.png" sizes="32x32" />
+<link rel="icon" href="https://deborahmillercatering.com/wp-content/uploads/2021/09/cropped-favicon-300x300.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://deborahmillercatering.com/wp-content/uploads/2021/09/cropped-favicon-300x300.png" />
+<meta name="msapplication-TileImage" content="https://deborahmillercatering.com/wp-content/uploads/2021/09/cropped-favicon-300x300.png" />
+</head>
+<body class="page-template-default page page-id-6891 wp-embed-responsive NavStyle1">
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-57NSTB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	
+	<!-- wp_body_open() -->
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg>
+	<!-- skip link -->
+	<a href="#MainContent" class="Btn">Skip to main content</a>
+
+	<!-- site head -->
+	<header id="SiteHead" itemscope itemtype="https://schema.org/WPHeader">
+		<div id="SiteHeadContent" class="Width1920">
+			<!-- menu btn -->
+			<button type="button" id="HamburgerBtn" class="DisplayFlex CenterXY NoBtnStyle" aria-label="Menu button">
+				<div id="Hamburger">
+					<div class="first"></div>
+					<div class="second"></div>
+					<div class="third"></div>
+				</div>
+			</button>
+
+			<!-- logo -->
+			<a href="/" class="TopLogo DisplayBlock" aria-label="Return home link">
+				<img src="index-files/wp-content/themes/dmce_custom/img/DEBdone-white.png" alt="Deborah Miller logo" width="304" height="100" class="LogoWhite">
+				<img src="index-files/wp-content/themes/dmce_custom/img/DEBdone-color.png" alt="Global Fussion logo" width="304" height="100" class="LogoColor">
+			</a>
+
+			<!-- top right -->
+			<div id="TopRight" class="DisplayFlex CenterY">
+				<!-- contact -->
+								<a href="/contact.html" class="Btn NoBtnArrow">Contact us</a>
+				<!-- how -->
+				<div id="TopRightHow PosRelative">
+					<button type="button" id="TopRightHowBtn" class="NoBtnStyle" aria-label="Learn how it works" aria-controls="TopRightHowContent" aria-expanded="false">			<svg viewBox="0 0 15 15" width="15" height="15" class="QuestionSVG" aria-labelledby="QuestionSvgTitle1" role="img">
+			<title id="QuestionSvgTitle1">Question icon</title>
+			<path d="M5 4.5c0.5-0.7 1.4-1.1 2.3-1.1 1.4 0 2.7 1 2.7 2.4 0 1-0.6 1.8-1.5 2.2C8.1 8.1 7.9 8.5 7.9 8.9l0 0.4H6.7l0-0.4c0-0.9 0.5-1.7 1.3-2 0.4-0.2 0.8-0.6 0.8-1.1C8.8 5 8 4.6 7.3 4.6c-0.5 0-1 0.2-1.3 0.6L5 4.5 5 4.5z" fill="#fff"/><path d="M7.3 9.9c0.5 0 0.9 0.4 0.9 0.9 0 0.5-0.4 0.9-0.9 0.9 -0.5 0-0.9-0.4-0.9-0.9C6.4 10.3 6.8 9.9 7.3 9.9L7.3 9.9z" fill="#fff"/><path d="M7.5 0C11.6 0 15 3.4 15 7.5S11.6 15 7.5 15 0 11.6 0 7.5 3.4 0 7.5 0L7.5 0zM7.5 0.9c-3.6 0-6.6 2.9-6.6 6.6s2.9 6.6 6.6 6.6 6.6-2.9 6.6-6.6S11.1 0.9 7.5 0.9L7.5 0.9z" fill="#fff"/></svg>
+			</button>
+					<div id="TopRightHowContent" class="BgWhite TxSz16" aria-labelledby="TopRightHowBtn" aria-hidden="true">
+						<p>Click <a href="/contact.html">Contact Us</a> on any page and use any of the contact details to talk to us. A Global Fussion event planner will answer your questions and begin planning your event.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- left nav -->
+			<section id="LeftNavSection" class="BgPurpleDark">
+				<div class="NavRing1 BgRings">&nbsp;</div>
+				<div class="NavRing2Frame"><div class="NavRing2 BgRings">&nbsp;</div></div>
+				<div class="LeftNavContent PosRelative">
+					<!-- logo -->
+					<a href="/" class="DisplayBlock" aria-label="Return home link">
+						<img src="index-files/wp-content/themes/dmce_custom/img/DEBdone-white.png" alt="Global Fussion logo" width="244" height="120" class="LeftNavLogo DisplayBlock">
+					</a>
+					<!-- nav -->
+					<nav class="LeftNav FontPrata TxSz18 TxCoWhite BorderlessLinks">
+													<div>
+																	<button type="button" id="LeftNavControl_1" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz18" aria-controls="LeftNavContent_1" aria-expanded="false">
+										Experiences													<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle1" role="img">
+			<title id="ChevronDownSvgTitle1">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+												</button>
+									<div id="LeftNavContent_1" class="AccordionContent" aria-labelledby="LeftNavControl_1" aria-hidden="true">
+																					<a href="/wedding.html" target="_self" rel="" class="DisplayBlock TxCoWhite BtmBorder">Weddings</a>
+																					<a href="/occasions.html" target="_self" rel="" class="DisplayBlock TxCoWhite ">Special Occasions</a>
+																					<a href="/corporate.html" target="_self" rel="" class="DisplayBlock TxCoWhite ">Corporate Events</a>
+																					<a href="/conference.html" target="_self" rel="" class="DisplayBlock TxCoWhite ">Conferences</a>
+												
+												<a href="/music.html" target="_self" rel="" class="DisplayBlock TxCoWhite ">Music Production</a>
+																			</div>
+															</div>
+													
+													<div>
+																	<a href="/about.html" target="_self" rel="" class="DisplayBlock TxCoWhite">Company</a>
+																</div>
+											</nav>
+					<!-- contact btn -->
+					<a href="/contact.html" class="BtnOutlined NoBtnArrow">Contact us</a>
+				</div>
+			</section>
+		</div>
+	</header>
+
+	<!-- skip link target -->
+	<div id="MainContent"></div>
+<main>
+	<article class="cf">
+										<!-- blocks -->
+				<section id="block_6123fe9a3edc2" class="CustomBlock HeroBlock HeroBlockWithImages HeroBlockTall PosRelative " aria-roledescription="carousel">
+			<div id="block_6123fe9a3edc2-slideshow" class="HeroSwiper swiper" aria-live="off">
+			<div class="swiper-wrapper">
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+						<picture class="attachment-1920x1080 size-1920x1080" decoding="async" loading="eager">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-1920x1080.jpg.webp 1920w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-480x270.jpg.webp 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-960x540.jpg.webp 960w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-2880x1620.jpg.webp 2880w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-3840x2160.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-620x350.jpg.webp 620w" sizes="100vw"/>
+<img width="1920" height="1080" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-1920x1080.jpg" alt="Appetizer, Seasonal Brassicas NYC Catering" decoding="async" loading="eager" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-1920x1080.jpg 1920w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-480x270.jpg 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-960x540.jpg 960w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-2880x1620.jpg 2880w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-3840x2160.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/appetizer-seasonal-brassicas-mfrh-original-620x350.jpg 620w" sizes="100vw"/>
+</picture>
+											</div>
+										<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+						<picture class="attachment-1920x1080 size-1920x1080" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-1920x1080.jpg.webp 1920w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-480x270.jpg.webp 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-960x540.jpg.webp 960w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-2880x1620.jpg.webp 2880w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-3840x2160.jpg.webp 3840w" sizes="100vw"/>
+<img width="1920" height="1080" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-1920x1080.jpg" alt="Picnic In The Park NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-1920x1080.jpg 1920w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-480x270.jpg 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-960x540.jpg 960w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-2880x1620.jpg 2880w, https://deborahmillercatering.com/wp-content/uploads/2021/10/picnic_0799-3840x2160.jpg 3840w" sizes="100vw"/>
+</picture>
+											</div>
+										<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+						<picture class="attachment-1920x1080 size-1920x1080" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-1920x1080.jpg.webp 1920w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-480x270.jpg.webp 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-960x540.jpg.webp 960w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-2880x1620.jpg.webp 2880w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-3840x2160.jpg.webp 3840w" sizes="100vw"/>
+<img width="1920" height="1080" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-1920x1080.jpg" alt="Bar with view of Empire State Building" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-1920x1080.jpg 1920w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-480x270.jpg 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-960x540.jpg 960w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-2880x1620.jpg 2880w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-with-view-of-empire-state-building-mfrh-original-3840x2160.jpg 3840w" sizes="100vw"/>
+</picture>
+											</div>
+								</div>
+		</div>
+
+		
+	<!-- text overlay -->
+	<div class="HeroBlockTxt Width600 TxCoWhite TxCenter">
+		<h1 class="TxCoWhite NoBtmMargin">Your Occasions, Your Top Party Catering<br>
+							<span class="FontLato TxSz20 DisplayBlock">Deeply Rooted in Experience</span>
+					</h1>
+	</div>
+</section>
+
+<section id="block_6123ff853edc3" class="CustomBlock IntroBlock Width900 TxCenter ">
+	<p class="FontPrata TxSz24 LgLineHeight">Catering for all of life’s milestones, Global Fussion Catering &#038; Events is your full-service high-level catering partner. Ranking as a top party catering and events company, let us help plan your baby shower, birthday party, graduation dinner, retirement party, celebration of life, or special occasion.<br />
+</p>
+			<p><a href="/contact.html" target="_self" rel="" class="Btn">Contact Us</a></p>
+		</section>
+
+<section id="block_612403e61de8d" class="CustomBlock TabsBlock PosRelative ">
+	<div class="BgPurpleLight">&nbsp;</div>
+	<div class="Width1920 Width100Percent cf">
+		<div class="BgPurpleLight">&nbsp;</div>
+		<div class="TabsBlockLeft">
+			<!-- header & description -->
+			<h3 class="TxSz46">Special Occasions by Global Fussion</h3>
+							<div>Explore our special occasions philosophy.</div>
+						<!-- tabs -->
+			<ul class="TabList NoListStyle" role="tablist" aria-label="Tab Control Group Buttons">
+									<li>
+						<button type="button" role="tab" id="block_612403e61de8d_TabControl_1" class="NoBtnStyle" aria-controls="block_612403e61de8d_TabContent_1" aria-selected="true" >Experience</button>
+					</li>
+									<li>
+						<button type="button" role="tab" id="block_612403e61de8d_TabControl_2" class="NoBtnStyle" aria-controls="block_612403e61de8d_TabContent_2" aria-selected="false" tabindex="-1">Food</button>
+					</li>
+									<li>
+						<button type="button" role="tab" id="block_612403e61de8d_TabControl_3" class="NoBtnStyle" aria-controls="block_612403e61de8d_TabContent_3" aria-selected="false" tabindex="-1">Design</button>
+					</li>
+							</ul>
+		</div>
+
+		<!-- content -->
+		<div class="TabsBlockRight">
+							<div tabindex="0" role="tabpanel" id="block_612403e61de8d_TabContent_1" aria-labelledby="block_612403e61de8d_TabControl_1" >
+					<!-- image & headers -->
+					<div class="ImgWithOverlayFrame ContainedImgSz1240x700">
+						<!-- image/video -->
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-1240x700.jpg.webp 1240w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-480x270.jpg.webp 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-620x350.jpg.webp 620w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-1860x1050.jpg.webp 1860w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-2480x1400.jpg.webp 2480w" sizes="(max-width: calc(1240px + 10vw)) 90vw, 1240px"/>
+<img width="1240" height="700" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-1240x700.jpg" alt="Mini Lobster Rolls NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-1240x700.jpg 1240w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-480x270.jpg 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-620x350.jpg 620w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-1860x1050.jpg 1860w, https://deborahmillercatering.com/wp-content/uploads/2021/10/horsdoeuvres-lobster_roll_1520-2480x1400.jpg 2480w" sizes="(max-width: calc(1240px + 10vw)) 90vw, 1240px"/>
+</picture>
+						<!-- headers -->
+						<div class="HeadersOverWhiteBgTxtOnImg PadLft50 PadRgt50 PadBtm50">
+															<div class="PadBtm20 TxBold TxSz12 TxUppercase TxCoWhite">Experience</div>
+														<h2 class="TxCoWhite NoBtmMargin">Bringing Your Unique Aesthetic to Life</h2>
+						</div>
+					</div>
+					<!-- content -->
+					<div class="WhiteBgContentUnderImg BgWhite PadTop50 PadLft50 PadRgt50 has-drop-cap PosRelative">
+						<p>Parties are about the people, the thoughtfully planned details, and the delicious food! The team at Global Fussion Catering &amp; Events is remarkable in their ability to imagine charming and innovative occasions that bring your unique aesthetic to life. Food is deeply personal, and therefore, choosing a caterer for your special occasion should involve strategic research, full trust, and a great deal of confidence. Global Fussion Catering &amp; Events is here to help make your catering choice simple and stress-free.</p>
+<p>We understand that we are being asked to play a large role in possibly the most important day of your life. We are being entrusted with this responsibility and are enthusiastic about the opportunity to bring our talents and lend them to your needs. Whether you are celebrating a milestone birthday, an important shower, a well-deserved retirement, or an exciting graduation, Global Fussion Catering &amp; Events will plan each detail and every bite to perfection.</p>
+													<p><a href="/contact.html" target="_self" rel="" class="Btn">Get started</a></p>
+												</div>
+				</div>
+							<div tabindex="0" role="tabpanel" id="block_612403e61de8d_TabContent_2" aria-labelledby="block_612403e61de8d_TabControl_2" hidden>
+					<!-- image & headers -->
+					<div class="ImgWithOverlayFrame ContainedImgSz1240x700">
+						<!-- image/video -->
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-1240x700.jpg.webp 1240w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-480x270.jpg.webp 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-620x350.jpg.webp 620w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-1860x1050.jpg.webp 1860w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-2480x1400.jpg.webp 2480w" sizes="(max-width: calc(1240px + 10vw)) 90vw, 1240px"/>
+<img width="1240" height="700" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-1240x700.jpg" alt="Cocktail Station, Cheese And Charcuterie NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-1240x700.jpg 1240w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-480x270.jpg 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-620x350.jpg 620w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-1860x1050.jpg 1860w, https://deborahmillercatering.com/wp-content/uploads/2021/10/cocktail-station-cheese-and-charcuterie-mfrh-original-2480x1400.jpg 2480w" sizes="(max-width: calc(1240px + 10vw)) 90vw, 1240px"/>
+</picture>
+						<!-- headers -->
+						<div class="HeadersOverWhiteBgTxtOnImg PadLft50 PadRgt50 PadBtm50">
+															<div class="PadBtm20 TxBold TxSz12 TxUppercase TxCoWhite">Food</div>
+														<h2 class="TxCoWhite NoBtmMargin">Surprise &#038; Delight with Every Bite</h2>
+						</div>
+					</div>
+					<!-- content -->
+					<div class="WhiteBgContentUnderImg BgWhite PadTop50 PadLft50 PadRgt50 has-drop-cap PosRelative">
+						<p>Does your guest of honor have a favorite food or cocktail? Global Fussion Catering &amp; Events wants to help you highlight it! We specialize in crafting menus based on your event needs to help you celebrate the way you envision. Our menus are planned and coordinated to ensure seasonal flavors are interwoven with the reliable favorites, all while maintaining diverse and local offerings. With every bite, we seek to surprise and delight.</p>
+<p>Our food tastes as good as it looks and looks as good as it tastes! Menus by Global Fussion Catering &amp; Events appeal to a wide range of tastes and audiences, which is critical when serving varied partygoers and large groups. We are here to listen to you and understand what you need to make your special occasion feel like yours.</p>
+											</div>
+				</div>
+							<div tabindex="0" role="tabpanel" id="block_612403e61de8d_TabContent_3" aria-labelledby="block_612403e61de8d_TabControl_3" hidden>
+					<!-- image & headers -->
+					<div class="ImgWithOverlayFrame ContainedImgSz1240x700">
+						<!-- image/video -->
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-1240x700.jpg.webp 1240w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-480x270.jpg.webp 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-620x350.jpg.webp 620w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-1860x1050.jpg.webp 1860w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-2480x1400.jpg.webp 2480w" sizes="(max-width: calc(1240px + 10vw)) 90vw, 1240px"/>
+<img width="1240" height="700" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-1240x700.jpg" alt="Wedding room set up, Metropolitan Building" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-1240x700.jpg 1240w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-480x270.jpg 480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-620x350.jpg 620w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-1860x1050.jpg 1860w, https://deborahmillercatering.com/wp-content/uploads/2021/10/wedding-room-set-up-metropolitan-building-2480x1400.jpg 2480w" sizes="(max-width: calc(1240px + 10vw)) 90vw, 1240px"/>
+</picture>
+						<!-- headers -->
+						<div class="HeadersOverWhiteBgTxtOnImg PadLft50 PadRgt50 PadBtm50">
+															<div class="PadBtm20 TxBold TxSz12 TxUppercase TxCoWhite">Design</div>
+														<h2 class="TxCoWhite NoBtmMargin">Honest Hospitality &#038; Thoughtful Design</h2>
+						</div>
+					</div>
+					<!-- content -->
+					<div class="WhiteBgContentUnderImg BgWhite PadTop50 PadLft50 PadRgt50 has-drop-cap PosRelative">
+						<p>From curated food platters to full-blown event design, Global Fussion Catering &amp; Events can take care of as much or as little of your special occasion as you want. We are purposeful in our coordination and execution of imaginative and captivating parties. The foundation to any great party is deeply rooted in honest hospitality and thoughtful design; your journey with us as your trusted party catering partner begins here, and we design the experience together.</p>
+<p>The team at Global Fussion Catering &amp; Events is composed of excellent listeners who make sure they understand your vision. Our job is to anticipate your needs and pull things out of you that perhaps you did not know you wanted, helping turn your dreams into the most special event of your life.</p>
+											</div>
+				</div>
+					</div>
+	</div>
+</section>
+
+<section id="block_616482710d7b2" class="CustomBlock CustomGalleryBlock Width1740 ">
+	<div class="cf">
+					<!-- large image -->
+			<button type="button" aria-label="View large slideshow" class="LgImgLeft LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="1">
+				<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-850x850.jpeg.webp 850w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-150x150.jpeg.webp 150w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-530x530.jpeg.webp 530w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-500x500.jpeg.webp 500w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-400x400.jpeg.webp 400w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-800x800.jpeg.webp 800w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-300x300.jpeg.webp 300w" sizes="(max-width: calc(850px + 10vw)) 90vw, 850px"/>
+<img width="850" height="850" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-850x850.jpeg" alt="Bar Area at 620 Loft and Garden" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-850x850.jpeg 850w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-150x150.jpeg 150w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-530x530.jpeg 530w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-500x500.jpeg 500w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-400x400.jpeg 400w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-800x800.jpeg 800w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-300x300.jpeg 300w" sizes="(max-width: calc(850px + 10vw)) 90vw, 850px"/>
+</picture>
+							</button>
+			<!-- small spaces -->
+								<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="2">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+<img width="400" height="267" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-scaled.jpg" alt="Plated Dessert - Pineapple Upside Down Cake, Coconut Ice Cream NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+</picture>
+											</button>
+													<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="3">
+						<img width="1200" height="800" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/loaded-purple-potato-cup-gif.gif" class="DisplayBlock" alt="GIF of Loaded Purple Potato Cup" decoding="async" loading="lazy" />											</button>
+													<div class="ReviewFrame TxCoPurpleDark">
+						<div>
+							<div class="StarsFrame PurpleStars" data-stars="5"></div>
+							<p class="FontPrata TxSz20">&ldquo;The evening was a smashing success with great food and service and would recommend Global Fussion catering and this team to anyone that wanted a fabulous event, in home or corporate, on autopilot.&rdquo;</p>
+							<div class="TxUppercase TxSz14 TxBold PinkBorderLinks"><p>Steven A. <a href="https://www.google.com/search?q=deborah+miller+catering&amp;oq=deborah+miller+catering&amp;aqs=chrome..69i57j46i175i199i512j0i512l2j0i22i30j69i60l3.3532j1j9&amp;sourceid=chrome&amp;ie=UTF-8#lrd=0x89c25a3b539e9393:0x71f64eb71c4f8191,1,,," target="_blank" rel="noopener"></a></p>
+</div>
+						</div>
+					</div>
+												<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="4">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+<img width="400" height="267" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-scaled.jpg" alt="Specialty Cocktail - Paloma Margarita NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+</picture>
+											</button>
+													<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="5">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+<img width="400" height="267" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-scaled.jpg" alt="Main Dish - Seed-Crusted Arctic Char, Farro Risotto NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+</picture>
+											</button>
+													<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="6">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+<img width="400" height="267" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-scaled.jpg" alt="Caesar Salad Flues NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+</picture>
+											</button>
+													<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="7">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+<img width="400" height="267" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-scaled.jpg" alt="Plated Dessert - Uovo Panna Cotta, Mango Suspension NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+</picture>
+											</button>
+													<button type="button" aria-label="View large slideshow" class="SmImg LaunchSlideshowBtn DisplayBlock PosRelative NoBtnStyle" data-slide="8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-400x400.jpg.webp 400w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-150x150.jpg.webp 150w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-530x530.jpg.webp 530w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-500x500.jpg.webp 500w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-850x850.jpg.webp 850w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-1000x1000.jpg.webp 1000w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-800x800.jpg.webp 800w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-300x300.jpg.webp 300w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+<img width="400" height="400" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-400x400.jpg" alt="Asian Station NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-400x400.jpg 400w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-150x150.jpg 150w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-530x530.jpg 530w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-500x500.jpg 500w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-850x850.jpg 850w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-1000x1000.jpg 1000w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-800x800.jpg 800w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-300x300.jpg 300w" sizes="(max-width: calc(400px + 10vw)) 90vw, 400px"/>
+</picture>
+											</button>
+											</div>
+
+	<!-- overlay -->
+		<div class="CustomGalleryOverlay Overlay" aria-hidden="true">
+		<!-- overlay close -->
+		<button type="button" class="WindowX NoBtnStyle" aria-label="Close">			<svg viewBox="0 0 50 50" width="50" height="50" class="XSVG" aria-labelledby="XSvgTitle1" role="img">
+			<title id="XSvgTitle1">X icon</title>
+			<path d="M46.8 50c-0.7 0-1.7-0.3-2-1l-19-18.7c-0.3-0.3-0.7-0.7-1-0.7 -0.3 0-0.7 0-1 0.3l-19 19c-0.7 0.7-1.3 1-2 1s-1.7-0.3-2-1c-1-1-1-3 0-4.3l19-19c0.7-0.7 0.7-1.3 0-2L0.8 5c-1-1-1-3 0-4.3C1.2 0.3 2.2 0 2.8 0s1.7 0.3 2 1l19 19c0.3 0 0.7 0.3 1 0.3 0.3 0 0.7 0 1-0.3l19-19c0.7-0.7 1.3-1 2-1 0.7 0 1.7 0.3 2 1 1 1 1 3 0 4.3L30.2 24c-0.7 0.7-0.7 1.3 0 2l19 19c1 1 1 3 0 4.3C48.5 49.7 47.5 50 46.8 50z"/></svg>
+			</button>
+		<!-- Swiper: navigation: previous -->
+		<button type="button" class="swiper-button swiper-button-prev NoBtnStyle DisplayFlex CenterXY" aria-controls="block_616482710d7b2_slideshow" aria-label="Previous Slide">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronLeftSVG" aria-labelledby="ChevronLeftSvgTitle1" role="img">
+			<title id="ChevronLeftSvgTitle1">Chevron left icon</title>
+			<path d="M37.8 46.6c0.8 0.8 0.8 2.1 0 2.8 -0.8 0.8-2 0.8-2.8 0l-22.8-23c-0.8-0.8-0.8-2.1 0-2.8L35 0.6c0.8-0.8 2-0.8 2.8 0 0.8 0.8 0.8 2.1 0 2.8L17 25 37.8 46.6z"/></svg>
+			</button>
+		<!-- Swiper: slideshow -->
+		<div id="block_616482710d7b2_slideshow" class="CustomGallerySwiper swiper" aria-live="off">
+			<div class="swiper-wrapper">
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft.jpeg.webp 1600w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-300x200.jpeg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-1024x682.jpeg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-768x512.jpeg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-750x500.jpeg.webp 750w" sizes="(max-width: calc(1600px + 10vw)) 90vw, 1600px"/>
+<img width="1600" height="1066" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft.jpeg" alt="Bar Area at 620 Loft and Garden" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft.jpeg 1600w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-300x200.jpeg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-1024x682.jpeg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-768x512.jpeg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/bar-area-620-loft-750x500.jpeg 750w" sizes="(max-width: calc(1600px + 10vw)) 90vw, 1600px"/>
+</picture>
+					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+<img width="3840" height="2560" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-scaled.jpg" alt="Plated Dessert - Pineapple Upside Down Cake, Coconut Ice Cream NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-pineapple-upside-down-cake-coconut-ice-cream-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+</picture>
+					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3of8">
+						<img width="1200" height="800" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/loaded-purple-potato-cup-gif.gif" class="DisplayBlock" alt="GIF of Loaded Purple Potato Cup" decoding="async" loading="lazy" />					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+<img width="3840" height="2560" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-scaled.jpg" alt="Specialty Cocktail - Paloma Margarita NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/specialty-cocktail-paloma-margarita-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+</picture>
+					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+<img width="3840" height="2560" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-scaled.jpg" alt="Main Dish - Seed-Crusted Arctic Char, Farro Risotto NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/seed-crusted-arctic-char-farro-risotto-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+</picture>
+					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+<img width="3840" height="2560" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-scaled.jpg" alt="Caesar Salad Flues NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/caesar-salad-flues-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+</picture>
+					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="7of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-scaled.jpg.webp 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-300x200.jpg.webp 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-1024x683.jpg.webp 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-768x512.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-750x500.jpg.webp 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+<img width="3840" height="2560" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-scaled.jpg" alt="Plated Dessert - Uovo Panna Cotta, Mango Suspension NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-scaled.jpg 3840w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-300x200.jpg 300w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-1024x683.jpg 1024w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-768x512.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/plated-dessert-uovo-panna-cotta-mango-suspension-mfrh-original-750x500.jpg 750w" sizes="(max-width: calc(3840px + 10vw)) 90vw, 3840px"/>
+</picture>
+					</div>
+									<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="8of8">
+						<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding.jpg.webp 1000w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-200x300.jpg.webp 200w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-684x1024.jpg.webp 684w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-768x1150.jpg.webp 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-750x1124.jpg.webp 750w" sizes="(max-width: calc(1000px + 10vw)) 90vw, 1000px"/>
+<img width="1000" height="1498" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding.jpg" alt="Asian Station NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding.jpg 1000w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-200x300.jpg 200w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-684x1024.jpg 684w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-768x1150.jpg 768w, https://deborahmillercatering.com/wp-content/uploads/2021/10/asian-station-stout-wedding-750x1124.jpg 750w" sizes="(max-width: calc(1000px + 10vw)) 90vw, 1000px"/>
+</picture>
+					</div>
+							</div>
+		</div>
+		<!-- Swiper: navigation: next -->
+		<button type="button" class="swiper-button swiper-button-next NoBtnStyle DisplayFlex CenterXY" aria-controls="block_616482710d7b2_slideshow" aria-label="Next Slide">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronRightSVG" aria-labelledby="ChevronRightSvgTitle1" role="img">
+			<title id="ChevronRightSvgTitle1">Chevron right icon</title>
+			<path d="M33 25L12.2 3.4c-0.8-0.8-0.8-2.1 0-2.8 0.8-0.8 2-0.8 2.8 0l22.8 23c0.8 0.8 0.8 2.1 0 2.8L15 49.4c-0.8 0.8-2 0.8-2.8 0 -0.8-0.8-0.8-2.1 0-2.8L33 25z"/></svg>
+			</button>
+	</div>
+	</section>
+
+<section id="block_612560160892f" class="CustomBlock LgImgSmTxBlock Width1740 ">
+	<!-- image & headers -->
+	<div class="ImgWithOverlayFrame ContainedImgSz1740x700">
+		<!-- image/video -->
+		<picture class="DisplayBlock" decoding="async" loading="lazy">
+<source type="image/webp" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-1740x700.jpg.webp 1740w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-870x350.jpg.webp 870w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-2610x1050.jpg.webp 2610w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-3480x1400.jpg.webp 3480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-720x290.jpg.webp 720w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-1440x580.jpg.webp 1440w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-2160x870.jpg.webp 2160w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-2880x1160.jpg.webp 2880w" sizes="(max-width: calc(1740px + 10vw)) 90vw, 1740px"/>
+<img width="1740" height="700" src="https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-1740x700.jpg" alt="Rack Of Lamb, Seasonal Vegetables NYC Catering" decoding="async" loading="lazy" srcset="https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-1740x700.jpg 1740w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-870x350.jpg 870w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-2610x1050.jpg 2610w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-3480x1400.jpg 3480w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-720x290.jpg 720w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-1440x580.jpg 1440w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-2160x870.jpg 2160w, https://deborahmillercatering.com/wp-content/uploads/2021/10/main-dish-rack-of-lamb-seasonal-vegetables-mfrh-original-2880x1160.jpg 2880w" sizes="(max-width: calc(1740px + 10vw)) 90vw, 1740px"/>
+</picture>
+		<!-- headers -->
+		<div class="HeadersOverWhiteBgTxtOnImg PadLft50 PadRgt50 PadBtm50">
+			<h2 class="TxCoWhite NoBtmMargin">Catering Made Simple and Stress-Free</h2>
+		</div>
+	</div>
+	<!-- content -->
+	<div class="Width600 TxCenter PadTop50">
+		<p>Inspiration for your special occasion takes root from your vision. Global Fussion Catering &amp; Events understands your need for your event to feel authentically you, and we work hard to reflect this in every event detail no matter the size. Our team is passionate about planning and executing events that matter and is therefore invested in being your party caterer for your special occasion.</p>
+					<p><a href="/contact.html" target="_self" rel="" class="Btn">Get Started</a></p>
+			</div>
+</section>
+
+<section id="block_6125665cd6d9b" class="CustomBlock CustomColumnsBlock Width1740 ">
+		<ul class="NoListStyle TwoColumns qty6 VrtGapLg HrzGapLg">
+					<li>
+														<h4>Private Party Catering</h4>
+								<p>Our event planners will help to mark your occasion with delicious food and drink, personal service, and creative touches. From your intimate dinner party to your afternoon tea party, your special at-home event to your swanky cocktail party, your personal holiday gathering to your celebratory milestone, you are in good hands with Global Fussion Catering &amp; Events.</p>
+			</li>
+					<li>
+														<h4>Gala Fundraiser Catering</h4>
+								<p>Every city is a party capital, and there is nothing quite like a Global Fussion planned party. Let us be your hand-picked catering partner and show those you seek donations from that you know how to throw a celebration rather than just practice solicitation! We work with nonprofit organizations of all sizes on their most important gatherings.</p>
+			</li>
+					<li>
+														<h4>Baby Showers</h4>
+								<p>Is it a boy or a girl? Or maybe you are having twins! Showers are the perfect way to help parents-to-be get a head start on items they will need once the baby arrives. The event centers around playful and delicious hors d&#8217;oeuvres and drinks. With small bites in hand and cocktails on the ready, spend time enjoying fun interactive and entertaining baby shower games while you let Global Fussion Catering &amp; Events take care of the rest!</p>
+			</li>
+					<li>
+														<h4>Birthday Party Catering</h4>
+								<p>Birthdays are meant to be celebrated with family, friends, and good food! Whether you are a piñata-hanging, champagne-popping, cupcake-eating, or charcuterie board-indulging party type, the Global Fussion Catering &amp; Events team loves a good theme and is here to make your birthday celebration feel authentically you.</p>
+			</li>
+					<li>
+														<h4>Graduation Parties</h4>
+								<p>You did it! After working hard and achieving your degree, you deserve to close the books and celebrate. Graduating is a milestone where celebration is not just merited, it is encouraged. Whether you have completed high school, college, or graduate school, you deserve a crowd-pleasing menu planned by Global Fussion Catering &amp; Events. The graduate has worked hard enough to get to this point—let us take it from here.</p>
+			</li>
+					<li>
+														<h4>Prom</h4>
+								<p>Who will be crowned Prom King and Queen? Prom Prince and Princess? What will be the prom song? What is on the prom dinner menu? While the prom committee focuses on invitations and decorations, Global Fussion Catering &amp; Events is here to give our expertise on the food—and is happy to assist with those invites and decorations too!</p>
+			</li>
+			</ul>
+</section>
+
+
+
+<section id="block_612663fc4170d" class="CustomBlock CtaBlock BgPurpleDark PosRelative ">
+	<div class="CtaRing1 BgRings">&nbsp;</div>
+	<div class="CtaRing2 BgRings">&nbsp;</div>
+	<div class="Width1920 PadTop60 PadBtm60 BgPurpleDark TxCoWhite">
+		<!-- center content -->
+		<div class="Width600 TxCenter PosRelative">
+			<h2 class="TxCoWhite">Ready to Get Started?</h2>
+			<a href="/contact.html" target="_self" rel="" class="BtnOutlined">Contact Us</a>
+		</div>
+		<!-- review -->
+		<div class="CtaReview">
+			<div class="StarsFrame WhiteStars" data-stars="5"></div>
+			<p class="FontPrata TxSz20">&ldquo;Global Fussion is the best in the UK.&rdquo;</p>
+			<div class="TxUppercase TxSz14 TxBold PinkBorderLinks"><p>Anthony M. <a href="https://www.google.com/search?q=deborah+miller+catering+and+events&amp;ei=2WpbYbeqJ4T0-gSRjpmoBQ&amp;ved=0ahUKEwj3-p3Z0rHzAhUEup4KHRFHBlUQ4dUDCA4&amp;uact=5&amp;oq=deborah+miller+catering+and+events&amp;gs_lcp=Cgdnd3Mtd2l6EAMyDgguEIAEEMcBEK8BEJMCOgcIABBHELADOgUIABCABDoGCAAQFhAeSgQIQRgAUNMQWJoXYIkYaAFwAngAgAGUAYgB_wmSAQQwLjEwmAEAoAEByAEIwAEB&amp;sclient=gws-wiz#lrd=0x89c25a3b539e9393:0x71f64eb71c4f8191,1,,," target="_blank" rel="noopener"></a></p>
+</div>
+		</div>
+	</div>
+</section>
+
+<section id="block_6126662aa2a55" class="CustomBlock AccordionBlock PosRelative ">
+	<div class="BgPurpleLight">&nbsp;</div>
+	<div class="Width1440 cf">
+		<div class="BgPurpleLight">&nbsp;</div>
+		<!-- left -->
+		<div class="AccordionLeft">
+			<h3 class="TxSz46">Frequently Asked Questions</h3>
+			<div class="AccordionLeftBtm BgWhite DisplayInlineBlock">
+				<p class="TxUppercase TxBold TxSz12">More Questions?</p>
+								<a href="/contact.html" target="_self" rel="" class="Btn">Contact Us</a>
+			</div>
+		</div>
+		<!-- right -->
+		<div class="AccordionRight">
+			<ul class="NoListStyle" aria-label="Accordion Control Group Buttons">
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_1" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_1" aria-expanded="false">
+							Do you cater on weekends?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle2" role="img">
+			<title id="ChevronDownSvgTitle2">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_1" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_1" aria-hidden="true">
+							<p>Yes. We are available to cater 365 days a year!</p>
+						</div>
+					</li>
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_2" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_2" aria-expanded="false">
+							Do you have specialty menus for showers, birthdays, etc.?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle3" role="img">
+			<title id="ChevronDownSvgTitle3">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_2" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_2" aria-hidden="true">
+							<p>Yes. We can design a menu for any special occasion you might be planning. Our culinary team excels at building custom catering menus with and without specific themes.</p>
+						</div>
+					</li>
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_3" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_3" aria-expanded="false">
+							Do you offer cakes?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle4" role="img">
+			<title id="ChevronDownSvgTitle4">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_3" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_3" aria-hidden="true">
+							<p>We have a full-time pastry chef on staff who can design specialty cakes just for you.</p>
+						</div>
+					</li>
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_4" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_4" aria-expanded="false">
+							Can you do décor for my special occasion?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle5" role="img">
+			<title id="ChevronDownSvgTitle5">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_4" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_4" aria-hidden="true">
+							<p>Yes. Our event planners are talented in creating unique designs suited for your specific event or party.</p>
+						</div>
+					</li>
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_5" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_5" aria-expanded="false">
+							What service styles do you offer?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle6" role="img">
+			<title id="ChevronDownSvgTitle6">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_5" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_5" aria-hidden="true">
+							<p>Ask and you shall receive. We are a full-service, fully licensed catering and events company. We offer passed, seated, reception, family-style, picnic, etc. You name it, we can do it.</p>
+						</div>
+					</li>
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_6" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_6" aria-expanded="false">
+							What types of parties do you cater?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle7" role="img">
+			<title id="ChevronDownSvgTitle7">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_6" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_6" aria-hidden="true">
+							<p>Any and all event types can be catered by us. If you can dream it up, we can make it happen.</p>
+						</div>
+					</li>
+									<li>
+						<button type="button" id="block_6126662aa2a55_AccordionControl_7" class="AccordionControl NoBtnStyle DisplayBlock FontPrata TxSz24 TxCoPurpleDark" aria-controls="block_6126662aa2a55_AccordionContent_7" aria-expanded="false">
+							What locations do you serve?							<div class="DisplayFlex CenterXY">			<svg viewBox="0 0 50 50" width="50" height="50" class="ChevronDownSVG" aria-labelledby="ChevronDownSvgTitle8" role="img">
+			<title id="ChevronDownSvgTitle8">Chevron down icon</title>
+			<path d="M43.6 12c1.5-1.5 3.9-1.5 5.3 0 1.5 1.5 1.5 3.8 0 5.3L27.7 38c-1.5 1.5-3.8 1.5-5.3 0L1.1 17.2c-1.5-1.5-1.5-3.8 0-5.3 1.5-1.5 3.9-1.5 5.3 0L25 29 43.6 12z"/></svg>
+			</div>
+						</button>
+						<div id="block_6126662aa2a55_AccordionContent_7" class="AccordionContent" aria-labelledby="block_6126662aa2a55_AccordionControl_7" aria-hidden="true">
+							<p>A UK catering company, we service all corners of the UK as well as the surrounding cities.</p>
+						</div>
+					</li>
+							</ul>
+		</div>
+	</div>
+</section>						</article>
+</main>
+
+<!-- footer -->
+<!-- footer -->
+<footer class="PosRelative BgPurpleDark">
+	<div class="FootRing1 BgRings">&nbsp;</div>
+	<div class="FootRing2 BgRings">&nbsp;</div>
+	<div class="Width1920 Width100Percent BgPurpleDark">
+		<div class="FootContentFrame PadLR PosRelative TxCoWhite BorderlessLinks">
+			<!-- logo & nav -->
+			<div class="FootLogoNav">
+				<!-- logo -->
+				<a href="/" class="FootLogo DisplayInlineBlock" aria-label="Return home link"><img src="index-files/wp-content/themes/dmce_custom/img/DEBdone-white.png" alt="Global Fussion logo" width="244" height="80" class="DisplayBlock"></a>
+				<!-- nav -->
+				<nav class="FootNav TxSz16 TxBold">
+											<a href="/about.html" target="_self" rel="" class="TxCoWhite">Company</a>
+											<a href="/contact.html" target="_self" rel="" class="TxCoWhite">Contact</a>
+									</nav>
+			</div>
+			<!-- legal -->
+			<p class="FootLegal TxSz14">
+				&copy; 2023 Global Fussion Catering & Events |
+									<a href="/privacy.html" target="_self" rel="" class="TxCoWhite">Privacy</a>
+				 | 					
+							</p>
+			<!-- social networks & MWBE logo -->
+			<div class="FootSocialMWBE">
+				<!-- social networks -->
+									<ul class="FootSocial NoListStyle">
+													<li><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="DisplayFlex CenterXY" aria-label="Instagram link">			<svg viewBox="0 0 50 50" width="50" height="50" class="InstagramSVG" aria-labelledby="InstagramSvgTitle1" role="img">
+			<title id="InstagramSvgTitle1">Instagram logo</title>
+			<path d="M49.8 14.7c0-2.1-0.4-4.1-1.2-6.1C48 6.9 47 5.4 45.7 4.2c-1.2-1.3-2.8-2.3-4.4-2.9 -1.9-0.7-4-1.1-6.1-1.2C32.6 0 31.8 0 25 0s-7.6 0-10.3 0.2c-2.1 0-4.1 0.4-6.1 1.2C7 1.9 5.4 2.9 4.2 4.2 2.9 5.4 1.9 7 1.3 8.6c-0.7 1.9-1.1 4-1.2 6.1C0 17.4 0 18.2 0 25s0 7.6 0.2 10.3c0 2.1 0.4 4.1 1.2 6.1C2 43.1 3 44.6 4.3 45.8c1.2 1.3 2.8 2.3 4.4 2.9 1.9 0.7 4 1.1 6.1 1.2C17.4 50 18.2 50 25 50s7.6 0 10.3-0.2c2.1 0 4.1-0.4 6.1-1.2 3.4-1.3 6-4 7.3-7.3 0.7-1.9 1.1-4 1.2-6.1C50 32.6 50 31.8 50 25S50 17.4 49.8 14.7zM45.3 35.1c0 1.6-0.3 3.2-0.9 4.6 -0.8 2.2-2.6 3.9-4.7 4.7 -1.5 0.6-3.1 0.8-4.6 0.9 -2.6 0.1-3.4 0.1-10.1 0.1s-7.5 0-10.1-0.1c-1.6 0-3.2-0.3-4.6-0.9 -1.1-0.4-2.1-1-2.9-1.9 -0.8-0.8-1.5-1.8-1.9-2.9 -0.6-1.5-0.8-3.1-0.9-4.6 -0.1-2.5-0.1-3.3-0.1-10s0-7.5 0.1-10.1c0-1.6 0.3-3.2 0.9-4.6 0.4-1.1 1-2.1 1.9-2.9 0.8-0.8 1.8-1.5 2.9-1.9 1.5-0.6 3.1-0.8 4.6-0.9 2.6-0.1 3.4-0.1 10.1-0.1s7.5 0 10.1 0.1c1.6 0 3.2 0.3 4.6 0.9 1.1 0.4 2.1 1 2.9 1.9 0.8 0.8 1.5 1.8 1.9 2.9 0.6 1.5 0.8 3.1 0.9 4.6 0.1 2.6 0.1 3.4 0.1 10.1S45.5 32.5 45.3 35.1zM25 12.2c-7.1 0-12.8 5.7-12.8 12.8S17.9 37.8 25 37.8 37.8 32.1 37.8 25 32.1 12.2 25 12.2zM25 33.3c-4.6 0-8.3-3.7-8.3-8.3s3.7-8.3 8.3-8.3 8.3 3.7 8.3 8.3S29.6 33.3 25 33.3zM41.3 11.7c0 1.7-1.3 3-3 3s-3-1.3-3-3 1.3-3 3-3l0 0C40 8.7 41.3 10 41.3 11.7z"/></svg>
+			</a></li>
+													<li><a href="https://www.facebook.com/" target="_blank" rel="noopener" class="DisplayFlex CenterXY" aria-label="Facebook link">			<svg viewBox="0 0 50 50" width="50" height="50" class="FacebookSVG" aria-labelledby="FacebookSvgTitle1" role="img">
+			<title id="FacebookSvgTitle1">Facebook logo</title>
+			<path d="M44.4 0H5.6C2.5 0 0 2.5 0 5.6v38.9c0 3 2.5 5.5 5.6 5.5H25V30.6h-5.6v-6.9H25V18c0-6 3.4-10.2 10.5-10.2h5V15h-3.3c-2.8 0-3.8 2.1-3.8 4v4.7h7.1l-1.6 6.9h-5.6V50h11.1c3.1 0 5.6-2.5 5.6-5.6V5.6C50 2.5 47.5 0 44.4 0z"/></svg>
+			</a></li>
+													<li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="DisplayFlex CenterXY" aria-label="LinkedIn link">			<svg viewBox="0 0 50 50" width="50" height="50" class="LinkedInSVG" aria-labelledby="LinkedInSvgTitle1" role="img">
+			<title id="LinkedInSvgTitle1">LinkedIn logo</title>
+			<path d="M11.1 5.6c0 3.1-1.9 5.6-5.6 5.6C2.2 11.1 0 8.6 0 5.8 0 2.8 2.2 0 5.6 0 8.9 0 11.1 2.5 11.1 5.6zM0 50h11.1V13.9H0V50zM37.8 14.4c-5.8 0-9.2 3.3-10.6 5.6h-0.3l-0.6-4.7h-10c0 3.1 0.3 6.7 0.3 10.8V50h11.1V30.3c0-1.1 0-1.9 0.3-2.8 0.8-1.9 2.2-4.4 5.3-4.4 3.9 0 5.6 3.3 5.6 7.8V50H50V29.4C50 19.2 44.7 14.4 37.8 14.4z"/></svg>
+			</a></li>
+													<li><a href="https://www.theknot.com/" target="_blank" rel="noopener" class="DisplayFlex CenterXY" aria-label="The Knot link">			<svg viewBox="0 0 50 50" width="50" height="50" class="TheKnotSVG" aria-labelledby="TheKnotSvgTitle1" role="img">
+			<title id="TheKnotSvgTitle1">The Knot logo</title>
+			<path d="M36.8 37.5c-0.5-0.3-1-0.1-1.3 0.4 -1.2 2-2.5 4.1-3.9 5.2 -0.6 0.5-1.2 0.8-1.7 0.8 -0.7 0.1-1.3 0-1.9-0.1 -0.9-0.3-1.6-0.7-2.3-1.3 -0.9-0.8-1.8-2-2.7-3.6 -0.3-0.5-0.6-1-0.8-1.5 -0.2-0.3-0.3-0.6-0.5-1 0-0.1-0.1-0.2-0.1-0.2 0.1 0 0.2-0.1 0.3-0.1H22c0.5-0.3 1-0.5 1.6-0.9 1.3-0.7 3-1.5 4.9-2.9 2.3-1.6 4.5-3.7 5.7-5 0.2-0.3 0.5-0.7 0.4-1.2 -0.2-0.7-0.6-1.7-1.6-2.3 -0.4-0.2-0.7-0.3-0.9-0.2 -0.3 0.1-0.5 0.2-0.6 0.5 -0.2 0.4-0.5 0.7-0.8 1l-0.1 0.1c-0.8 0.9-1.9 2.2-4.4 3.9 -2.4 1.7-4.7 3-5.5 3.4 0-0.7 0.1-2.5 0.1-3 0.1-0.5 0.1-1 0.1-1.6 0.1-0.9 0.2-1.8 0.3-2.6 0-0.1 0.1-0.2 0.3-0.5 0.8-1.4 3.2-5.8 4.6-9.7 0.8-2.4 3.4-10.3 1.1-13.7 -0.4-0.7-1-1.2-1.8-1.3 -1.3-0.2-2.4 0-3.3 0.8 -1.3 1.2-2.3 3-2.9 5.6 -0.6 2.4-0.9 5.3-1.1 6.8L18 13.9c-0.1 0.8-0.2 1.9-0.3 3.1 -0.1 1.3-0.2 2.6-0.3 3.7 -0.2 1.7-0.5 3-0.8 3.9 -0.3 0.7-0.7 1.5-1.2 2.2 -0.6 0.9-1.3 1.8-2.1 2.7 -0.1 0.1-0.2 0.3-0.3 0.4 -0.4 0.4-0.7 0.9-1 1.4 -0.2 0.3-0.3 0.7 0 1.2 0.4 0.6 1 1 1.7 1.4 0.7 0.3 1.1-0.1 1.3-0.4 0.4-0.5 0.8-1.1 1.2-1.7l0.3-0.5c0-0.1 0.1-0.1 0.2-0.2 0 0.5-0.1 1.3-0.2 2.1 -0.1 1.4-0.3 3.2-0.4 4.6 -0.3 3.8-1 10.1-1.1 10.9 -0.1 0.6 0.2 1 0.8 1.2 0.4 0.1 0.9 0.2 1.4 0.2 0.4 0 0.8 0 1.2-0.2 0.6-0.2 0.9-0.5 0.9-0.9 0-1.1 0.4-5.8 0.6-7.8 0.1 0.1 0.1 0.2 0.2 0.3s0.1 0.2 0.2 0.3c0.8 1.2 1.7 2.5 2.8 3.6 0.9 1 2 1.7 3.2 2.1 1 0.4 2.2 0.5 3.6 0.5 1 0 1.9-0.2 2.6-0.6 3.2-1.5 5-4.9 5.7-6C38.8 40 37.8 38 36.8 37.5zM22.2 9.8c0.5-2.8 1-4.6 1.6-5.7 0.1-0.2 0.2-0.4 0.4-0.5 0.1-0.1 0.3-0.1 0.4-0.1h0.1c0.1 0 0.1 0 0.1 0 0.6 1.1 0 3.6-0.6 6.1 -0.1 0.4-0.2 0.8-0.3 1.2 -0.6 2.4-1.8 5.5-2.5 7C21.5 16 21.8 11.8 22.2 9.8z"/></svg>
+			</a></li>
+													<li><a href="https://www.weddingwire.com/" target="_blank" rel="noopener" class="DisplayFlex CenterXY" aria-label="WeddingWire link">			<svg viewBox="0 0 50 50" width="50" height="50" class="WeddingWireSVG" aria-labelledby="WeddingWireSvgTitle1" role="img">
+			<title id="WeddingWireSvgTitle1">WeddingWire logo</title>
+			<circle cx="25.5" cy="5.3" r="5.3"/><circle cx="25.5" cy="16.7" r="4.3"/><path d="M24.4 50.1c0-0.2-1.2-18.1-6-25.4 -4.7-7.3-6.6-9.1-6.6-9.1l1.3-1.4c0.1 0.1 2.1 1.9 7 9.5 2.1 3.1 3.5 8 4.5 12.7V23.7h1.9V50L24.4 50.1z"/><path d="M26.2 50.1l-1.9-0.1c0-0.8 1.3-18.6 6.4-26.4 4.9-7.6 6.9-9.4 7-9.5l1.3 1.4c0 0-1.9 1.8-6.6 9.1C27.5 31.9 26.2 49.9 26.2 50.1z"/><circle cx="10.9" cy="11.3" r="5.3"/><circle cx="39.1" cy="11.3" r="5.3"/></svg>
+			</a></li>
+											</ul>
+								<!-- MWBE logo -->
+				<a href="https://www1.nyc.gov/nycbusiness/mwbe" target="_blank" rel="noopener" class="FootMWBE DisplayInlineFlex CenterXY BgWhite ">
+					<img width="146" height="37" src="https://deborahmillercatering.com/wp-content/uploads/2021/08/mwbe-logo.svg" class="DisplayInlineBlock" alt="Mwbe Logo" decoding="async" loading="lazy" />				
+					</a>
+			</div>
+			<!-- contact info  -->
+						<p class="FootContact TxSz14">
+				91 Sparsholt Road, Barking | Essex, IG11 7YG | <a href="tel:+442087332189" class="TxCoWhite">+44.208.733.2189</a>
+			</p>
+		</div>
+	</div>
+</footer>
+
+<!-- contact overlay -->
+<div class="ContactOverlay Overlay" aria-hidden="true">
+	<button type="button" id="ContactWindowX" class="WindowX NoBtnStyle" aria-label="Close">			<svg viewBox="0 0 50 50" width="50" height="50" class="XSVG" aria-labelledby="XSvgTitle2" role="img">
+			<title id="XSvgTitle2">X icon</title>
+			<path d="M46.8 50c-0.7 0-1.7-0.3-2-1l-19-18.7c-0.3-0.3-0.7-0.7-1-0.7 -0.3 0-0.7 0-1 0.3l-19 19c-0.7 0.7-1.3 1-2 1s-1.7-0.3-2-1c-1-1-1-3 0-4.3l19-19c0.7-0.7 0.7-1.3 0-2L0.8 5c-1-1-1-3 0-4.3C1.2 0.3 2.2 0 2.8 0s1.7 0.3 2 1l19 19c0.3 0 0.7 0.3 1 0.3 0.3 0 0.7 0 1-0.3l19-19c0.7-0.7 1.3-1 2-1 0.7 0 1.7 0.3 2 1 1 1 1 3 0 4.3L30.2 24c-0.7 0.7-0.7 1.3 0 2l19 19c1 1 1 3 0 4.3C48.5 49.7 47.5 50 46.8 50z"/></svg>
+			</button>
+	<div class="ContactWindow Window BgPurpleDark">
+		<h3 class="TxSz36 TxCoWhite TxCenter">Here We Go</h3>
+		<p class="TxCoWhite TxCenter">Now it’s time to get to know you and your event, we can’t wait to be inspired.</p>
+		<!--[if lte IE 8]>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+<![endif]-->
+<script type="rocketlazyloadscript" charset="utf-8" data-rocket-type="text/javascript" data-rocket-src="//js.hsforms.net/forms/v2.js"></script>
+<script type="rocketlazyloadscript">hbspt.forms.create({region: "na1", portalId: "19969696", formId: "7defe2e7-8e6d-4297-9319-6193de351af7"});</script>	</div>
+</div>
+
+<!-- subscribe overlay -->
+<div class="SubscribeOverlay Overlay" aria-hidden="true">
+	<button type="button" id="SubscribeWindowX" class="WindowX NoBtnStyle" aria-label="Close">			<svg viewBox="0 0 50 50" width="50" height="50" class="XSVG" aria-labelledby="XSvgTitle3" role="img">
+			<title id="XSvgTitle3">X icon</title>
+			<path d="M46.8 50c-0.7 0-1.7-0.3-2-1l-19-18.7c-0.3-0.3-0.7-0.7-1-0.7 -0.3 0-0.7 0-1 0.3l-19 19c-0.7 0.7-1.3 1-2 1s-1.7-0.3-2-1c-1-1-1-3 0-4.3l19-19c0.7-0.7 0.7-1.3 0-2L0.8 5c-1-1-1-3 0-4.3C1.2 0.3 2.2 0 2.8 0s1.7 0.3 2 1l19 19c0.3 0 0.7 0.3 1 0.3 0.3 0 0.7 0 1-0.3l19-19c0.7-0.7 1.3-1 2-1 0.7 0 1.7 0.3 2 1 1 1 1 3 0 4.3L30.2 24c-0.7 0.7-0.7 1.3 0 2l19 19c1 1 1 3 0 4.3C48.5 49.7 47.5 50 46.8 50z"/></svg>
+			</button>
+	<div class="SubscribeWindow Window BgPurpleDark">
+		<h3 class="TxSz36 TxCoWhite TxCenter">Subscribe</h3>
+		<p class="TxCoWhite TxCenter">Fusce iaculis, libero vitae auctor dignissim, lorem lacus mollis orci, eu elementum est lacus id justo.</p>
+		<form>
+<input name="email-address" placeholder="Email Address"/>
+<input type="submit" value="Submit" />
+</form>	</div>
+</div>
+
+<!-- wp_footer() -->
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src='https://deborahmillercatering.com/wp-content/cache/min/1/swiper@7/swiper-bundle.min.js?ver=1693248464' id='swiper-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src='https://deborahmillercatering.com/wp-content/cache/min/1/wp-content/themes/dmce_custom/js/custom.js?ver=1693248464' id='custom-js' defer></script>
+</body>
+
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->
